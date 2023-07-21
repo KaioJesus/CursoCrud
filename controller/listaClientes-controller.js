@@ -25,22 +25,32 @@ const criaNovaLinha = (nome, email, id) =>  {
 
 const tabela = document.querySelector('[data-tabela]')
 
-tabela.addEventListener('click', (evento) => {
+tabela.addEventListener('click', async (evento) => {
     let ehBotaoDeDeleta = evento.target.className === 'botao-simples botao-simples--excluir'
     //pegando como alvo a classe do elemento
     if(ehBotaoDeDeleta){
-        const linhaCliente = evento.target.closest('[data-id]')
-        //elemento pai mais proximo da td -> a tr
-        let id = linhaCliente.dataset.id
-        clienteService.removeCliente(id)
-        .then(()=>{
+        try{
+            const linhaCliente = evento.target.closest('[data-id]')
+            //elemento pai mais proximo da td -> a tr
+            let id = linhaCliente.dataset.id
+            await clienteService.removeCliente(id)
             linhaCliente.remove()
-        })
+        } catch(erro){
+            window.location.href = "../telas/erro.html"
+        }
+       
     }
 })
 
-clienteService.listaClientes()
-.then(data => {
-        data.forEach(element => {
+const render = async () => {
+    try{
+        const listaCliente = await clienteService.listaClientes()
+        listaCliente.forEach(element => {
         tabela.appendChild(criaNovaLinha(element.nome,element.email, element.id))
-})})
+        })
+    } catch(erro){
+        window.location.href = "../telas/erro.html"
+    }
+}
+
+render();
