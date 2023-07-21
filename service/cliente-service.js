@@ -23,15 +23,17 @@ const criaCliente = (nome, email) => {
     })
 }
 
-// const removeCliente = (id) => { 
-//     return fetch(`http://localhost:3000/profile/${id}`, {
-//         method: 'DELETE'
-//     })
-// }
+const removeCliente = (id) => { 
+    return fetch(`http://localhost:3000/profile/${id}`, {
+        method: 'DELETE'
+        //metodo deletar
+    })
+}
 
 export const clienteService = { 
     listaClientes,
-    criaCliente
+    criaCliente,
+    removeCliente
 }
 
 //exportando objetos que são funções para outros arquivos

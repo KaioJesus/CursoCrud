@@ -16,6 +16,7 @@
 .botao-simples {
     border: none;
     background-color: unset;
+    cursor: pointer;
 }
 
 .botao-simples--adicionar {
@@ -23,9 +24,13 @@
 }
 
 .botao-simples--excluir {
-    color: var(--cor-aviso);
+    color: var(--cor-aviso);   
+}
+.botao-simples--excluir:hover, .botao-simples--editar:hover {
+    text-decoration: underline;
 }
 
 .botao-simples--editar {
     color: var(--cor-sucesso);
 }
+
